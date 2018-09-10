@@ -41,10 +41,10 @@
 	       (progn
 		 (dolist (mode '(c-mode c++-mode))
 		   (evil-leader/set-key-for-mode mode
-						 "r." #'lsp-ui-peek-find-definitions
-						 "r," #'lsp-ui-peek-find-references
-						 "r[" #'lsp-ui-peek-jump-backward
-						 "r]" #'lsp-ui-peek-jump-forward
+						 "g." #'lsp-ui-peek-find-definitions
+						 "g," #'lsp-ui-peek-find-references
+						 "g[" #'lsp-ui-peek-jump-backward
+						 "g]" #'lsp-ui-peek-jump-forward
 						 "qb" (lambda () (interactive) (lsp-ui-peek-find-custom 'base "$cquery/base"))
 						 "qc" (lambda () (interactive) (lsp-ui-peek-find-custom 'base "$cquery/callers"))
 						 "qd" (lambda () (interactive) (lsp-ui-peek-find-custom 'base "$cquery/derived"))

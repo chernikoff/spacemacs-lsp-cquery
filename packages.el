@@ -9,14 +9,14 @@
 ;;
 ;;; License: Unlicense
 
-(defconst lsp-cquery-packages
+(defconst spacemacs-lsp-cquery-packages
   '(
     cquery
     company-lsp
     lsp-ui
     ))
 
-(defun lsp-cquery/init-cquery ()
+(defun spacemacs-lsp-cquery/init-cquery ()
   (use-package cquery
     :init
     (progn
@@ -26,7 +26,7 @@
       (setq cquery-executable lsp-cquery-executable)
     )))
 
-(defun lsp-cquery/init-company-lsp ()
+(defun spacemacs-lsp-cquery/init-company-lsp ()
   (use-package company-lsp
 	       :init
 	       (progn
@@ -34,7 +34,7 @@
 		 (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
 		 )))
 
-(defun lsp-cquery/init-lsp-ui ()
+(defun spacemacs-lsp-cquery/init-lsp-ui ()
   (use-package lsp-ui
 	       :init
 	       (progn
@@ -53,7 +53,7 @@
 						 "hi" #'cquery-inheritance-hierarchy
 						 "hI" (lambda () (interactive) (cquery-inheritance-hierarchy t))
 						 "hc" #'cquery-call-hierarchy
-						  "hC" (lambda () (interactive) (cquery-call-hierarchy t))
+						 "hC" (lambda () (interactive) (cquery-call-hierarchy t))
 						 "ll" #'lsp-ui-imenu
 						 "lr" #'lsp-rename
 						 )))))

@@ -32,6 +32,7 @@
 	       (progn
 		 (spacemacs|add-company-backends :backends company-lsp :modes c-mode-common)
 		 (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+		 (setq cquery-extra-init-params '(:completion (:detailedLabel t)))	
 		 )))
 
 (defun spacemacs-lsp-cquery/init-lsp-ui ()

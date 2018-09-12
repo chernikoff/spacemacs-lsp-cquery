@@ -25,6 +25,13 @@
 
       (cquery-use-default-rainbow-sem-highlight)
 
+      (defun spacemacs//c-c++-lsp-string (prefix suffix)
+	  (concat prefix "cquery" suffix))
+
+      (defun spacemacs//c-c++-lsp-symbol (prefix suffix)
+	  "Return a symbol for the LSP backend specified by the `c-c++-backend' configuration variable."
+	    (intern (spacemacs//c-c++-lsp-string prefix suffix)))
+
       (defun spacemacs//c-c++-lsp-call-function (prefix suffix &rest args)
 	  (apply (spacemacs//c-c++-lsp-symbol prefix suffix) args))
 
@@ -61,14 +68,11 @@
 	  (plist-put (lsp--text-document-position-params) :context
 		     '(:role 16))))
 
-    (defun spacemacs//c-c++-lsp-cquery-customise-lsp-ui-peek ()
-        (defun c-c++/base () (interactive) (lsp-ui-peek-find-custom 'base "$cquery/base")))
-
-    (defun spacemacs//c-c++-lsp-ccls-customise-lsp-ui-peek ()
-        (defun c-c++/base ()
-	      (interactive)
-	          (lsp-ui-peek-find-custom 'base "$ccls/inheritanceHierarchy"
-					         (append (lsp--text-document-position-params) '(:flat t :level 3)))))
+      (defun spacemacs//c-c++-lsp-ccls-customise-lsp-ui-peek ()
+	(defun c-c++/base ()
+	  (interactive)
+	  (lsp-ui-peek-find-custom 'base "$ccls/inheritanceHierarchy"
+				   (append (lsp--text-document-position-params) '(:flat t :level 3)))))
 
       (defun c-c++/call-hierarchy () (interactive) (spacemacs//c-c++-lsp-funcall-interactively nil "-call-hierarchy" nil))
       (defun c-c++/call-hierarchy-inv () (interactive) (spacemacs//c-c++-lsp-funcall-interactively nil "-call-hierarchy" t))
@@ -83,6 +87,8 @@
 						  ;; FIXME gf conflicts with `lsp-ui-flycheck-list' binding in lsp layer
 						  ;; Better corrected in lsp-layer? rebinding here for now
 						  "g." #'lsp-ui-peek-find-definitions
+						  "gi" #'lsp-ui-peek-find-implementation
+						  "gw" #'lsp-ui-peek-find-workspace-symbol
 						  "g," #'lsp-ui-peek-find-references
 						  "g[" #'lsp-ui-peek-jump-backward
 						  "g]" #'lsp-ui-peek-jump-forward
@@ -95,7 +101,6 @@
 						  "gc" #'c-c++/callers
 						  "gv" #'c-c++/vars
 						  ;; help/hierarchy
-						  "hb" #'c-c++/base ;;Replace this with lsp-goto-implementation in lsp-layer?
 						  "hc" #'c-c++/call-hierarchy
 						  "hC" #'c-c++/call-hierarchy-inv
 						  "hi" #'c-c++/inheritance-hierarchy

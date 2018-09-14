@@ -111,6 +111,7 @@
 						  "lp" #'c-c++/preprocess-file
 						  "ll" #'lsp-ui-imenu
 						  "lr" #'lsp-rename
+						  "la" #'lsp-ui-sideline-apply-code-actions
 						  ))
 
       (spacemacs|add-company-backends :backends company-lsp :modes c-mode-common)
